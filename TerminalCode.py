@@ -199,10 +199,10 @@ class PumpControlGUI:
         """Prepare a message to send and send it to the correct pump based on its letter."""
         # Map pumps to their respective IPs
         pump_ip_map = {
-            "A": '10.3.141.193',
-            "B": '10.3.141.141',
-            "C": '10.3.141.244',
-            "D": '10.3.141.197'
+            "A": b'A',
+            "B": b'B',
+            "C": b'C',
+            "D": b'D'
         }
  
         # Calculate the scaled rate
@@ -211,34 +211,33 @@ class PumpControlGUI:
         print(f"Scaled rate for Pump {pump}: {done}")
  
         # Determine the IP address of the selected pump
-        ip = pump_ip_map.get(pump)
-        if not ip:
-            print(f"No IP configured for Pump {pump}.")
-            return
+        message = pump_ip_map.get(pump)
+        ip = '10.0.0.47'
+ 
  
         # Prepare the message based on the scaled rate
         if done > 9:
-            message = b'ten\n'
+            message += b'ten\n'
         elif done > 8:
-            message = b'nine\n'
+            message += b'nine\n'
         elif done > 7:
-            message = b'eight\n'
+            message += b'eight\n'
         elif done > 6:
-            message = b'seven\n'
+            message += b'seven\n'
         elif done > 5:
-            message = b'six\n'
+            message += b'six\n'
         elif done > 4:
-            message = b'five\n'
+            message += b'five\n'
         elif done > 3:
-            message = b'four\n'
+            message += b'four\n'
         elif done > 2:
-            message = b'three\n'
+            message += b'three\n'
         elif done > 1:
-            message = b'two\n'
+            message += b'two\n'
         elif done > 0:
-            message = b'one\n'
+            message += b'one\n'
         else:
-            message = b'zero\n'
+            message += b'zero\n'
  
         # Print infusion details for debugging
         print(f"Infusion Details for Pump {pump}:\nDrug: {drug}\nVTBI: {vtbi} mL\nRate: {rate:.2f} mL/h")
