@@ -89,7 +89,7 @@ void loop() {
           Serial.println("Received command: " + currentLine);
           
           // Respond to the client
-          handleCommand(currentLine)
+          handleCommand(currentLine);
 
           currentLine = ""; // Clear the line for the next command
           break; // Break out of the while loop
