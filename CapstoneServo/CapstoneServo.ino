@@ -17,9 +17,9 @@ const char* password = "98765432";
 
 float deg = 0;          // variable to store the servo position
 int servoPin = 27; 
-int servoPinB = 25;
-int servoPinC = 2;
-int servoPinD = 17;
+int servoPinB = 26;
+int servoPinC = 17;
+int servoPinD = 12;
 
 WiFiServer server(80);
 
@@ -32,28 +32,42 @@ void setup() {
 	ESP32PWM::allocateTimer(3);
 	servoA.setPeriodHertz(50);    // standard 50 hz servo
 	servoA.attach(servoPin, 500, 2500);
-  servoA.write(degreeToPos(50)); //22 = closed
-  delay(10000);
-  servoA.write(degreeToPos(22));
 
+  //servoA.write(degreeToPos(50)); //22 = closed
+  //delay(10000);
+  //servoA.write(degreeToPos(22));
 
 	servoB.setPeriodHertz(50);    // standard 50 hz servo
 	servoB.attach(servoPinB, 500, 2500);
-  servoB.write(degreeToPos(50)); //22 = closed
-  delay(10000);
-  servoB.write(degreeToPos(22));
+
+  //servoB.write(degreeToPos(50)); //22 = closed
+  //delay(10000);
+  //servoB.write(degreeToPos(22));
 
   servoC.setPeriodHertz(50);    // standard 50 hz servo
 	servoC.attach(servoPinC, 500, 2500);
-  servoC.write(degreeToPos(50)); //22 = closed
-  delay(10000);
-  servoC.write(degreeToPos(22));
+
+  //servoC.write(degreeToPos(50)); //22 = closed
+  //delay(10000);
+  //servoC.write(degreeToPos(22));
 
   servoD.setPeriodHertz(50);    // standard 50 hz servo
 	servoD.attach(servoPinD, 500, 2500);
+
+  //servoD.write(degreeToPos(50)); //22 = closed
+  //delay(10000);
+  //servoD.write(degreeToPos(22));
+
+  servoA.write(degreeToPos(50)); //22 = closed
+  servoB.write(degreeToPos(50)); //22 = closed
+  servoC.write(degreeToPos(50)); //22 = closed
   servoD.write(degreeToPos(50)); //22 = closed
+
   delay(10000);
-  servoD.write(degreeToPos(22));
+  servoA.write(degreeToPos(22)); //22 = closed
+  servoB.write(degreeToPos(22)); //22 = closed
+  servoC.write(degreeToPos(22)); //22 = closed
+  servoD.write(degreeToPos(22)); //22 = closed
 
   WiFi.begin(ssid, password);
  
@@ -107,12 +121,15 @@ float degreeToPos(float deg) {
 }
 
 void moveServo(Servo &servo, int angle) {
+  Serial.println("Moving!");
     servo.write(degreeToPos(angle));
     delay(2000); // Remove or reduce if not needed
 }
 
 void handleCommand(String command) {
     if (command.startsWith("A")) {
+        Serial.println("Starts with A!");
+        Serial.println(command);
         moveServo(servoA, parseAngle(command));
     } else if (command.startsWith("B")) {
         moveServo(servoB, parseAngle(command));
@@ -124,17 +141,29 @@ void handleCommand(String command) {
 }
 
 int parseAngle(String command) {
-    if (command.endsWith("ten")) return 60;
-    if (command.endsWith("nine")) return 31;
-    if (command.endsWith("eight")) return 30;
-    if (command.endsWith("seven")) return 29;
-    if (command.endsWith("six")) return 28;
-    if (command.endsWith("five")) return 27;
-    if (command.endsWith("four")) return 26;
-    if (command.endsWith("three")) return 25;
-    if (command.endsWith("two")) return 24;
-    if (command.endsWith("one")) return 23;
-    if (command.endsWith("zero")) return 22;
+    //if (command.endsWith("ten")) return 60;
+    //if (command.includes("nine")) return 31;
+    //if (command.endsWith("eight")) return 30;
+    //if (command.endsWith("seven")) return 29;
+    //if (command.endsWith("six")) return 28;
+    //if (command.endsWith("five")) return 27;
+    //if (command.endsWith("four")) return 26;
+    //if (command.endsWith("three")) return 25;
+    //if (command.endsWith("two")) return 24;
+    //if (command.endsWith("one")) return 23;
+    //if (command.endsWith("zero")) return 22;
+
+    if(command.indexOf("ten") > 0) return 60;
+    if(command.indexOf("nine") > 0) return 31;
+    if(command.indexOf("eight") > 0) return 30;
+    if(command.indexOf("seven") > 0) return 29;
+    if(command.indexOf("six") > 0) return 28;
+    if(command.indexOf("five") > 0) return 27;
+    if(command.indexOf("four") > 0) return 26;
+    if(command.indexOf("three") > 0) return 25;
+    if(command.indexOf("two") > 0) return 24;
+    if(command.indexOf("one") > 0) return 23;
+    if(command.indexOf("zero") > 0) return 22;
     // Add all mappings as needed
 
 
