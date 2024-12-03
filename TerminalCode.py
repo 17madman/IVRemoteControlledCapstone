@@ -30,25 +30,28 @@ class PumpControlGUI:
         self.clear_screen()
         header = tk.Label(self.root, text="Pump Control Dashboard", font=("Helvetica", 18), bg=self.primary_bg, fg=self.text_color)
         header.pack(pady=5)
- 
+
         # Parent frame for all pumps
         parent_frame = tk.Frame(self.root, bg=self.primary_bg)
         parent_frame.pack(expand=True, fill="both", padx=5)
- 
+
         def close_keyboard(event=None):
             subprocess.run(["pkill", "wvkbd"])
             subprocess.run(["pkill", "wvkbd-mobintl"])
-            
- 
+
         # Bind Enter key to close the keyboard
         self.root.bind("<Return>", close_keyboard)
- 
+
+        # Define unique colors for each pump
+        pump_colors = ["#FFCDD2", "#C8E6C9", "#BBDEFB", "#FFF9C4"]
+
         for i, pump in enumerate(["A", "B", "C", "D"]):
             # Each pump panel
-            frame = tk.Frame(parent_frame, bg=self.secondary_bg, padx=5, pady=5, relief="raised", bd=2)
+            frame = tk.Frame(parent_frame, bg=pump_colors[i], padx=5, pady=5, relief="raised", bd=2)
             frame.grid(row=0, column=i, padx=5, pady=5, sticky="nsew")
- 
+
             self.create_pump_controls(frame, pump)
+
  
     def create_pump_controls(self, frame, pump):
         tk.Label(frame, text=f"Pump {pump}", font=("Helvetica", 14), bg=self.secondary_bg, fg=self.text_color).pack(pady=2)
