@@ -89,199 +89,7 @@ void loop() {
           Serial.println("Received command: " + currentLine);
           
           // Respond to the client
-          if (currentLine.startsWith("Aten")) {
-            delay(2000);
-            Serial.println("ten");
-            servoA.write(degreeToPos(60));
-            delay(2000);
-          } else if (currentLine.startsWith("Anine")) {
-            delay(2000);
-            servoA.write(degreeToPos(31));
-            Serial.println("nine");
-            delay(2000);
-          } else if (currentLine.startsWith("Aeight")) {
-            delay(2000);
-            servoA.write(degreeToPos(30));
-            Serial.println("eight");
-            delay(2000);
-          } else if (currentLine.startsWith("Aseven")) {
-            delay(2000);
-            servoA.write(degreeToPos(29));
-            delay(2000);
-          } else if (currentLine.startsWith("Asix")) {
-            delay(2000);
-            servoA.write(degreeToPos(28));
-            delay(2000);
-          } else if (currentLine.startsWith("Afive")) {
-            delay(2000);
-            servoA.write(degreeToPos(27));
-            delay(2000);
-          } else if (currentLine.startsWith("Afour")) {
-            delay(2000);
-            servoA.write(degreeToPos(26));
-            delay(2000);
-          } else if (currentLine.startsWith("Athree")) {
-            delay(2000);
-            servoA.write(degreeToPos(25));
-            delay(2000);  
-          } else if (currentLine.startsWith("Atwo")) {
-            delay(2000);
-            servoA.write(degreeToPos(24));
-            delay(2000);
-          } else if (currentLine.startsWith("Aone")) {
-            delay(2000);
-            servoA.write(degreeToPos(23));
-            delay(2000);
-          } else if (currentLine.startsWith("Azero")) {
-            delay(2000);
-            servoA.write(degreeToPos(22));
-            delay(2000);
-          }
-
-          else if (currentLine.startsWith("Bten")) {
-            delay(2000);
-            Serial.println("ten");
-            servoB.write(degreeToPos(60));
-            delay(2000);
-          } else if (currentLine.startsWith("Bnine")) {
-            delay(2000);
-            servoB.write(degreeToPos(31));
-            Serial.println("nine");
-            delay(2000);
-          } else if (currentLine.startsWith("Beight")) {
-            delay(2000);
-            servoB.write(degreeToPos(30));
-            Serial.println("eight");
-            delay(2000);
-          } else if (currentLine.startsWith("Bseven")) {
-            delay(2000);
-            servoB.write(degreeToPos(29));
-            delay(2000);
-          } else if (currentLine.startsWith("Bsix")) {
-            delay(2000);
-            servoB.write(degreeToPos(28));
-            delay(2000);
-          } else if (currentLine.startsWith("Bfive")) {
-            delay(2000);
-            servoB.write(degreeToPos(27));
-            delay(2000);
-          } else if (currentLine.startsWith("Bfour")) {
-            delay(2000);
-            servoB.write(degreeToPos(26));
-            delay(2000);
-          } else if (currentLine.startsWith("Bthree")) {
-            delay(2000);
-            servoB.write(degreeToPos(25));
-            delay(2000);  
-          } else if (currentLine.startsWith("Btwo")) {
-            delay(2000);
-            servoB.write(degreeToPos(24));
-            delay(2000);
-          } else if (currentLine.startsWith("Bone")) {
-            delay(2000);
-            servoB.write(degreeToPos(23));
-            delay(2000);
-          } else if (currentLine.startsWith("Bzero")) {
-            delay(2000);
-            servoB.write(degreeToPos(22));
-            delay(2000);
-          }
-          else if (currentLine.startsWith("Cten")) {
-            delay(2000);
-            Serial.println("ten");
-            servoC.write(degreeToPos(60));
-            delay(2000);
-          } else if (currentLine.startsWith("Cnine")) {
-            delay(2000);
-            servoC.write(degreeToPos(31));
-            Serial.println("nine");
-            delay(2000);
-          } else if (currentLine.startsWith("Ceight")) {
-            delay(2000);
-            servoC.write(degreeToPos(30));
-            Serial.println("eight");
-            delay(2000);
-          } else if (currentLine.startsWith("Cseven")) {
-            delay(2000);
-            servoC.write(degreeToPos(29));
-            delay(2000);
-          } else if (currentLine.startsWith("Csix")) {
-            delay(2000);
-            servoC.write(degreeToPos(28));
-            delay(2000);
-          } else if (currentLine.startsWith("Cfive")) {
-            delay(2000);
-            servoC.write(degreeToPos(27));
-            delay(2000);
-          } else if (currentLine.startsWith("Cfour")) {
-            delay(2000);
-            servoC.write(degreeToPos(26));
-            delay(2000);
-          } else if (currentLine.startsWith("Cthree")) {
-            delay(2000);
-            servoC.write(degreeToPos(25));
-            delay(2000);  
-          } else if (currentLine.startsWith("Ctwo")) {
-            delay(2000);
-            servoC.write(degreeToPos(24));
-            delay(2000);
-          } else if (currentLine.startsWith("Cone")) {
-            delay(2000);
-            servoC.write(degreeToPos(23));
-            delay(2000);
-          } else if (currentLine.startsWith("Czero")) {
-            delay(2000);
-            servoC.write(degreeToPos(22));
-            delay(2000);
-          }
-          else if (currentLine.startsWith("Dten")) {
-            delay(2000);
-            Serial.println("ten");
-            servoD.write(degreeToPos(60));
-            delay(2000);
-          } else if (currentLine.startsWith("Dnine")) {
-            delay(2000);
-            servoD.write(degreeToPos(31));
-            Serial.println("nine");
-            delay(2000);
-          } else if (currentLine.startsWith("Deight")) {
-            delay(2000);
-            servoD.write(degreeToPos(30));
-            Serial.println("eight");
-            delay(2000);
-          } else if (currentLine.startsWith("Dseven")) {
-            delay(2000);
-            servoD.write(degreeToPos(29));
-            delay(2000);
-          } else if (currentLine.startsWith("Dsix")) {
-            delay(2000);
-            servoD.write(degreeToPos(28));
-            delay(2000);
-          } else if (currentLine.startsWith("Dfive")) {
-            delay(2000);
-            servoD.write(degreeToPos(27));
-            delay(2000);
-          } else if (currentLine.startsWith("Dfour")) {
-            delay(2000);
-            servoD.write(degreeToPos(26));
-            delay(2000);
-          } else if (currentLine.startsWith("Dthree")) {
-            delay(2000);
-            servoD.write(degreeToPos(25));
-            delay(2000);  
-          } else if (currentLine.startsWith("Dtwo")) {
-            delay(2000);
-            servoD.write(degreeToPos(24));
-            delay(2000);
-          } else if (currentLine.startsWith("Done")) {
-            delay(2000);
-            servoD.write(degreeToPos(23));
-            delay(2000);
-          } else if (currentLine.startsWith("Dzero")) {
-            delay(2000);
-            servoD.write(degreeToPos(22));
-            delay(2000);
-          }
+          handleCommand(currentLine)
 
           currentLine = ""; // Clear the line for the next command
           break; // Break out of the while loop
@@ -298,59 +106,36 @@ float degreeToPos(float deg) {
   return deg/1.5;
 }
 
-void moveServo(servo servoX, ){
+void moveServo(Servo &servo, int angle) {
+    servo.write(degreeToPos(angle));
+    delay(2000); // Remove or reduce if not needed
+}
+
+void handleCommand(String command) {
+    if (command.startsWith("A")) {
+        moveServo(servoA, parseAngle(command));
+    } else if (command.startsWith("B")) {
+        moveServo(servoB, parseAngle(command));
+    } else if (command.startsWith("C")) {
+        moveServo(servoC, parseAngle(command));
+    } else if (command.startsWith("D")) {
+        moveServo(servoD, parseAngle(command));
+    }
+}
+
+int parseAngle(String command) {
+    if (command.endsWith("ten")) return 60;
+    if (command.endsWith("nine")) return 31;
+    if (command.endsWith("eight")) return 30;
+    if (command.endsWith("seven")) return 29;
+    if (command.endsWith("six")) return 28;
+    if (command.endsWith("five")) return 27;
+    if (command.endsWith("four")) return 26;
+    if (command.endsWith("three")) return 25;
+    if (command.endsWith("two")) return 24;
+    if (command.endsWith("one")) return 23;
+    if (command.endsWith("zero")) return 22;
+    // Add all mappings as needed
 
 
-
-
-
-  
-  if (currentLine.startsWith("Aten")) {
-    delay(2000);
-    Serial.println("ten");
-    servoA.write(degreeToPos(60));
-    delay(2000);
-  } else if (currentLine.startsWith("Anine")) {
-    delay(2000);
-    servoA.write(degreeToPos(31));
-    Serial.println("nine");
-    delay(2000);
-  } else if (currentLine.startsWith("Aeight")) {
-    delay(2000);
-    servoA.write(degreeToPos(30));
-    Serial.println("eight");
-    delay(2000);
-  } else if (currentLine.startsWith("Aseven")) {
-    delay(2000);
-    servoA.write(degreeToPos(29));
-    delay(2000);
-  } else if (currentLine.startsWith("Asix")) {
-    delay(2000);
-    servoA.write(degreeToPos(28));
-    delay(2000);
-  } else if (currentLine.startsWith("Afive")) {
-    delay(2000);
-    servoA.write(degreeToPos(27));
-    delay(2000);
-  } else if (currentLine.startsWith("Afour")) {
-    delay(2000);
-    servoA.write(degreeToPos(26));
-    delay(2000);
-  } else if (currentLine.startsWith("Athree")) {
-    delay(2000);
-    servoA.write(degreeToPos(25));
-    delay(2000);  
-  } else if (currentLine.startsWith("Atwo")) {
-    delay(2000);
-    servoA.write(degreeToPos(24));
-    delay(2000);
-  } else if (currentLine.startsWith("Aone")) {
-    delay(2000);
-    servoA.write(degreeToPos(23));
-    delay(2000);
-  } else if (currentLine.startsWith("Azero")) {
-    delay(2000);
-    servoA.write(degreeToPos(22));
-    delay(2000);
-  }
 }
