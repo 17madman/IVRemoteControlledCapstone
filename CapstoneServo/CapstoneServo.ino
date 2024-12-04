@@ -18,8 +18,9 @@ const char* password = "98765432";
 float deg = 0;          // variable to store the servo position
 int servoPin = 27; 
 int servoPinB = 26;
-int servoPinC = 17;
-int servoPinD = 12;
+int servoPinC = 33;
+int servoPinD = 17;
+
 
 WiFiServer server(80);
 
@@ -30,6 +31,7 @@ void setup() {
 	ESP32PWM::allocateTimer(1);
 	ESP32PWM::allocateTimer(2);
 	ESP32PWM::allocateTimer(3);
+  ESP32PWM::allocateTimer(4);
 	servoA.setPeriodHertz(50);    // standard 50 hz servo
 	servoA.attach(servoPin, 500, 2500);
 
@@ -37,12 +39,19 @@ void setup() {
   //delay(10000);
   //servoA.write(degreeToPos(22));
 
-	servoB.setPeriodHertz(50);    // standard 50 hz servo
-	servoB.attach(servoPinB, 500, 2500);
 
   //servoB.write(degreeToPos(50)); //22 = closed
   //delay(10000);
   //servoB.write(degreeToPos(22));
+
+  servoD.setPeriodHertz(50);    // standard 50 hz servo
+	servoD.attach(servoPinD, 500, 2500);
+
+  servoA.setPeriodHertz(50);    // standard 50 hz servo
+	servoA.attach(servoPin, 500, 2500);
+
+  servoB.setPeriodHertz(50);    // standard 50 hz servo
+	servoB.attach(servoPinB, 500, 2500);
 
   servoC.setPeriodHertz(50);    // standard 50 hz servo
 	servoC.attach(servoPinC, 500, 2500);
@@ -51,17 +60,17 @@ void setup() {
   //delay(10000);
   //servoC.write(degreeToPos(22));
 
-  servoD.setPeriodHertz(50);    // standard 50 hz servo
-	servoD.attach(servoPinD, 500, 2500);
+  
 
   //servoD.write(degreeToPos(50)); //22 = closed
   //delay(10000);
   //servoD.write(degreeToPos(22));
 
   servoA.write(degreeToPos(50)); //22 = closed
-  servoB.write(degreeToPos(50)); //22 = closed
-  servoC.write(degreeToPos(50)); //22 = closed
   servoD.write(degreeToPos(50)); //22 = closed
+  servoC.write(degreeToPos(50)); //22 = closed
+  servoB.write(degreeToPos(50)); //22 = closed
+  
 
   delay(10000);
   servoA.write(degreeToPos(22)); //22 = closed
