@@ -7,18 +7,20 @@ Servo servoC;
 Servo servoD;
 
 
-//const char* ssid = "capstone-wifi";
-//const char* password = "password";
+const char* ssid = "capstone-wifi";
+const char* password = "password";
 
-const char* ssid = "Barronsrevenge";
-const char* password = "98765432";
+//const char* ssid = "Barronsrevenge";
+//const char* password = "98765432";
 
 // const int LEDpin = 27;
 
 float deg = 0;          // variable to store the servo position
 int servoPin = 27; 
 int servoPinB = 26;
+
 int servoPinC = 33;
+
 int servoPinD = 17;
 
 
@@ -27,13 +29,14 @@ WiFiServer server(80);
 void setup() {
 
   Serial.begin(9600);
+  delay(1000);
+  Serial.println("Starting!");
+  delay(1000);
 	ESP32PWM::allocateTimer(0);
 	ESP32PWM::allocateTimer(1);
 	ESP32PWM::allocateTimer(2);
 	ESP32PWM::allocateTimer(3);
-  ESP32PWM::allocateTimer(4);
-	servoA.setPeriodHertz(50);    // standard 50 hz servo
-	servoA.attach(servoPin, 500, 2500);
+
 
   //servoA.write(degreeToPos(50)); //22 = closed
   //delay(10000);
@@ -47,11 +50,25 @@ void setup() {
   servoD.setPeriodHertz(50);    // standard 50 hz servo
 	servoD.attach(servoPinD, 500, 2500);
 
-  servoA.setPeriodHertz(50);    // standard 50 hz servo
-	servoA.attach(servoPin, 500, 2500);
+  bool attached2 = servoD.attached();
+  Serial.println(attached2 ? "Servo D attached successfully" : "Servo D attach failed");
+
 
   servoB.setPeriodHertz(50);    // standard 50 hz servo
 	servoB.attach(servoPinB, 500, 2500);
+
+  delay(1000);
+
+  servoA.setPeriodHertz(50);    // standard 50 hz servo
+	servoA.attach(servoPin, 500, 2500);
+
+
+
+  bool attached = servoA.attached();
+  Serial.println(attached ? "Servo A attached successfully" : "Servo A attach failed");
+
+  delay(500);
+  //servoA.write(degreeToPos(50));
 
   servoC.setPeriodHertz(50);    // standard 50 hz servo
 	servoC.attach(servoPinC, 500, 2500);
@@ -66,17 +83,17 @@ void setup() {
   //delay(10000);
   //servoD.write(degreeToPos(22));
 
-  servoA.write(degreeToPos(50)); //22 = closed
-  servoD.write(degreeToPos(50)); //22 = closed
-  servoC.write(degreeToPos(50)); //22 = closed
-  servoB.write(degreeToPos(50)); //22 = closed
+  servoA.write(degreeToPos(0)); //22 = closed
+  servoD.write(degreeToPos(0)); //22 = closed
+  servoC.write(degreeToPos(0)); //22 = closed
+  servoB.write(degreeToPos(0)); //22 = closed
   
 
   delay(10000);
-  servoA.write(degreeToPos(22)); //22 = closed
-  servoB.write(degreeToPos(22)); //22 = closed
-  servoC.write(degreeToPos(22)); //22 = closed
-  servoD.write(degreeToPos(22)); //22 = closed
+  servoA.write(degreeToPos(20)); //22 = closed
+  servoB.write(degreeToPos(20)); //22 = closed
+  servoC.write(degreeToPos(20)); //22 = closed
+  servoD.write(degreeToPos(20)); //22 = closed
 
   WiFi.begin(ssid, password);
  
@@ -162,17 +179,17 @@ int parseAngle(String command) {
     //if (command.endsWith("one")) return 23;
     //if (command.endsWith("zero")) return 22;
 
-    if(command.indexOf("ten") > 0) return 60;
-    if(command.indexOf("nine") > 0) return 31;
-    if(command.indexOf("eight") > 0) return 30;
-    if(command.indexOf("seven") > 0) return 29;
-    if(command.indexOf("six") > 0) return 28;
-    if(command.indexOf("five") > 0) return 27;
-    if(command.indexOf("four") > 0) return 26;
-    if(command.indexOf("three") > 0) return 25;
-    if(command.indexOf("two") > 0) return 24;
-    if(command.indexOf("one") > 0) return 23;
-    if(command.indexOf("zero") > 0) return 22;
+    if(command.indexOf("ten") > 0) return 10;
+    if(command.indexOf("nine") > 0) return 11;
+    if(command.indexOf("eight") > 0) return 12;
+    if(command.indexOf("seven") > 0) return 13;
+    if(command.indexOf("six") > 0) return 14;
+    if(command.indexOf("five") > 0) return 15;
+    if(command.indexOf("four") > 0) return 16;
+    if(command.indexOf("three") > 0) return 17;
+    if(command.indexOf("two") > 0) return 18;
+    if(command.indexOf("one") > 0) return 19;
+    if(command.indexOf("zero") > 0) return 20;
     // Add all mappings as needed
 
 

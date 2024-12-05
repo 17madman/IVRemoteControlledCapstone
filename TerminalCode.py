@@ -212,7 +212,7 @@ class PumpControlGUI:
  
         # Determine the IP address of the selected pump
         message = pump_ip_map.get(pump)
-        ip = '10.0.0.47'
+        ip = '10.3.141.197'
  
  
         # Prepare the message based on the scaled rate
