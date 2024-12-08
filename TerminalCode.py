@@ -41,11 +41,9 @@ class PumpControlGUI:
         parent_frame = tk.Frame(self.root, bg=self.primary_bg)
         parent_frame.pack(expand=True, fill="both", padx=5)
 
-        def close_keyboard(event=None):
-            subprocess.run(["pkill", "wvkbd"])
-            subprocess.run(["pkill", "wvkbd-mobintl"])
 
-        self.root.bind("<Return>", close_keyboard)
+
+        #self.root.bind("<Return>", close_keyboard)
 
         pump_colors = ["#FFCDD2", "#C8E6C9", "#BBDEFB", "#FFF9C4"]
 
@@ -170,7 +168,99 @@ class PumpControlGUI:
         duration_mins_entry.bind("<Button-1>", self.open_keyboard)
  
     def open_keyboard(self, event=None):
-        subprocess.Popen(['wvkbd', '--layout', 'num-only'])
+        # Get the widget that triggered the event and its label
+        focused_widget = event.widget
+        field_label = ""
+        if isinstance(focused_widget, tk.Entry):
+            if "Volume" in focused_widget.master.winfo_children()[0].cget("text"):
+                field_label = "Volume"
+            elif "Duration" in focused_widget.master.winfo_children()[0].cget("text"):
+                field_label = "Duration"
+
+        self.active_entry = focused_widget
+        self.active_field_label = field_label
+
+        if hasattr(self, 'keyboard_window') and self.keyboard_window.winfo_exists():
+            self.keyboard_window.lift()
+            return
+
+        self.keyboard_window = tk.Toplevel(self.root)
+        self.keyboard_window.title("Number Keyboard")
+        self.keyboard_window.geometry("500x300")
+        self.keyboard_window.configure(bg=self.secondary_bg)
+
+        # Center the keyboard window relative to the root window
+        x = self.root.winfo_x() + (self.root.winfo_width() // 2) - 250
+        y = self.root.winfo_y() + (self.root.winfo_height() // 2) - 150
+        self.keyboard_window.geometry(f"+{x}+{y}")
+
+        # Display area showing the field label and input
+        display_frame = tk.Frame(self.keyboard_window, bg=self.secondary_bg)
+        display_frame.pack(pady=10)
+
+        self.display_label = tk.Label(
+            display_frame, text=f"{field_label}: ", font=("Arial", 16),
+            bg=self.secondary_bg, fg=self.text_color
+        )
+        self.display_label.pack(side="left", padx=10)
+
+        self.display_value = tk.Label(
+            display_frame, text="", font=("Arial", 16, "bold"),
+            bg=self.secondary_bg, fg=self.text_color
+        )
+        self.display_value.pack(side="left")
+
+        # Create a grid of number buttons
+        button_frame = tk.Frame(self.keyboard_window, bg=self.secondary_bg)
+        button_frame.pack()
+
+        buttons = [
+            ('1', 0, 0), ('2', 0, 1), ('3', 0, 2),
+            ('4', 1, 0), ('5', 1, 1), ('6', 1, 2),
+            ('7', 2, 0), ('8', 2, 1), ('9', 2, 2),
+            ('0', 3, 1), ('.', 3, 0), ('⌫', 3, 2)  # Backspace button
+        ]
+
+        for text, row, col in buttons:
+            btn = tk.Button(
+                button_frame, text=text, font=("Arial", 14), width=5, height=2,
+                bg=self.button_bg, fg=self.text_color,
+                command=lambda t=text: self.keyboard_input(t)
+            )
+            btn.grid(row=row, column=col, padx=5, pady=5)
+
+        # Enter button to confirm the input
+        enter_button = tk.Button(
+            self.keyboard_window, text="Enter", font=("Arial", 14), width=16, height=2,
+            bg="#4CAF50", fg="white", command=self.confirm_input
+        )
+        enter_button.pack(pady=10)
+
+        # Bind close event to the keyboard window
+        self.keyboard_window.protocol("WM_DELETE_WINDOW", self.close_keyboard)
+
+    def close_keyboard(self, event=None):
+        if hasattr(self, 'keyboard_window') and self.keyboard_window.winfo_exists():
+            self.keyboard_window.destroy()
+
+    def keyboard_input(self, key):
+        if self.active_entry:
+            current_text = self.active_entry.get()
+            if key == '⌫':  # Handle backspace
+                new_text = current_text[:-1]
+            else:  # Append the pressed key
+                new_text = current_text + key
+            self.active_entry.delete(0, tk.END)
+            self.active_entry.insert(0, new_text)
+            self.display_value.config(text=new_text)  # Update the display
+
+    def confirm_input(self):
+        # Close the keyboard and clear the display
+        if self.active_entry:
+            print(f"{self.active_field_label} confirmed: {self.active_entry.get()}")
+        self.close_keyboard()
+
+
 
  
     def toggle_infusion(self, pump, button):
